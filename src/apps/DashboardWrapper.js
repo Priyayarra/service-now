@@ -5,6 +5,7 @@ import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/co
 import { makeStyles } from '@material-ui/core/styles'
 
 import PageContainer from './components/Pagecontainer/PageContainer'
+import Sidebar from './components/Sidebar/Sidebar'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function DashboardWrapper() {
+export default function DashboardWrapper(props) {
     const classes = useStyles();
     return(
         <div>
@@ -33,7 +34,7 @@ export default function DashboardWrapper() {
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-            <PageContainer />
+            {props.children}
         </div>
     )
 }

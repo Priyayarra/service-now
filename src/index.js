@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import DashboardWrapper from './apps/DashboardWrapper';
+import Routes from './routes'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DashboardWrapper />
+    <Routes />
   </React.StrictMode>,
   document.getElementById('root')
 );
