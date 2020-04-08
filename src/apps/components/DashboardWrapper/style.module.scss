@@ -1,0 +1,38 @@
+$base-color: #276381;
+$display: flex;
+
+.appbar {
+    background-color: #fff !important;
+    box-shadow: none !important;
+}
+.toolbar {
+    background-color: $base-color;
+}
+.custombar {
+    display: $display;
+    width: 100%;
+}
+.menuItemsSection {
+    background-color: #406c83;
+    flex: 2;
+}
+.list {
+    display: inline-flex !important; 
+    width: 100%;
+}
+.listItem {
+    width: auto !important; 
+    color: #fff;
+    cursor: pointer;
+    &:hover { 
+        background-color: $base-color !important;
+    }
+}
+.searchbarSection {
+    background-color: #537688;
+    flex: 1;
+    display: $display;
+    justify-content: space-between;
+    padding: 16px;
+    color: #fff;
+}

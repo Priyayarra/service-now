@@ -1,7 +1,18 @@
 import React, { useState } from 'react'
 import { compose } from 'recompose'
 import { withRouter, Link } from 'react-router-dom'
-import { productOverview } from '../../../routes'
+import {
+    productOverview,
+    productWrapper,
+    getRoute,
+    assetManagement,
+    changeManagement,
+    contarctManagement,
+    procurement,
+    productCatalog,
+    benchmarks,
+} from '../../../routes'
+import styles from './style.module.scss'
 
 import { Drawer, List, ListItem, ListItemText, Typography, ListItemIcon } from '@material-ui/core'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
@@ -11,16 +22,11 @@ function Sidebar(props) {
 
     const history = props.history
 
-    const [productItemExpander, setProductItemExpander] = useState(false)
-    const [productSubItemExpander, setProductSubItemExpander] = useState(true)
-    
-    const handleClickProductItemExpander = () => {
-        setProductItemExpander(!productItemExpander);
-    }
-    const handleClickProductSubItemExpander = () => {
-        setProductSubItemExpander(!productSubItemExpander);
-    }
-    const navigateTo = location => {
+    const subItemExpander = useExpander(true)
+    const itemExpander = useExpander(true)
+
+
+    const navigateTo = location => () => {
         // console.log('location', history.push)
         history.push(location)
     }
@@ -28,209 +34,210 @@ function Sidebar(props) {
         {
             label: 'IT Service Management',
             onClick: navigateTo(productOverview),
-            sidebar: false,
             items: [
                 {
                     label: 'Asset Management',
-                    onClick: '',
-                    sidebar: true,
+                    onClick: navigateTo(assetManagement),
                     subItems: [
                         {
                             label: 'Mobile for IT Asset Management',
-                            onClick: ''
+                            onClick: navigateTo(productOverview)
                         },
                         {
                             label: 'Asset and CI management',
-                            onClick: ''
+                            onClick: navigateTo(productOverview)
                         },
                         {
                             label: 'Asset classes',
-                            onClick: '',
+                            onClick: navigateTo(productOverview),
                             subItems: [
                                 {
-                                    label: 'Create an asset class' ,
-                                    onClick: ''
+                                    label: 'Create an asset class',
+                                    onClick: navigateTo(productOverview),
                                 },
                                 {
                                     label: 'Add depreciation to an asset',
-                                    onClick: ''
+                                    onClick: navigateTo(productOverview),
                                 },
                                 {
                                     label: 'Create License assets',
-                                    onClick: ''
+                                    onClick: navigateTo(productOverview),
                                 },
                                 {
                                     label: 'Set asset states and substates',
-                                    onClick: ''
+                                    onClick: navigateTo(productOverview),
                                 },
                             ]
                         },
                         {
                             label: 'Create fixed assets',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Consumables life cycle',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Create pre-allocated assets',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Stockrooms',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Transfer orders for Asset Management',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Create a transfer order for Asset Management',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Transfer order line asset tracking',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Example Asset Management process',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'ITSM Software Asset Management',
-                            onClick: '',
+                            onClick: navigateTo(productOverview),
                             subItems: [
                                 {
                                     label: 'Software Asset Management plugin',
-                                    onClick: '',
+                                    onClick: navigateTo(productOverview),
                                     subItems: [
                                         {
                                             label: 'Software Asset Management plugin Overview module',
-                                            onClick: ''
+                                            onClick: navigateTo(productOverview),
                                         },
                                         {
                                             label: 'Software Asset Management plugin setup process',
-                                            onClick: ''
+                                            onClick: navigateTo(productOverview),
                                         },
                                     ]
                                 },
                                 {
                                     label: 'Software Asset Management Foundation plugin',
-                                    onClick: ''
+                                    onClick: navigateTo(productOverview),
                                 },
                             ]
                         },
                         {
                             label: 'Organization Management',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Installed with Model Management',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Installed with Asset Management',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                         {
                             label: 'Domain separation and Asset Management',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         },
                     ]
                 },
                 {
                     label: 'Contract Management',
-                    onClick: '',
+                    onClick: navigateTo(contarctManagement),
                     subItems: [
                         {
                             label: 'Contact',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         }
                     ]
                 },
                 {
                     label: 'Procurement',
-                    onClick: '',
+                    onClick: navigateTo(procurement),
                     subItems: [
                         {
                             label: 'Contact',
-                            onClick: ''
+                            onClick: navigateTo(productOverview),
                         }
                     ]
                 },
                 {
                     label: 'Product Catalog',
+                    onClick: navigateTo(productCatalog)
                 },
                 {
                     label: 'Benchmarks',
+                    onClick: navigateTo(benchmarks)
                 },
                 {
                     label: 'Change Management',
+                    onClick: navigateTo(changeManagement)
                 },
-                {
-                    label: 'Coaching',
-                },
-                {
-                    label: 'Continual Improvement Management',
-                },
-                {
-                    label: 'Expense Line',
-                },
-                {
-                    label: 'ITSM Virtual Agent',
-                },
-                {
-                    label: 'Walk-up Experience',
-                },
-                {
-                    label: 'ITSM Agent Workspace',
-                },
-                {
-                    label: 'Incident Communications Management',
-                },
-                {
-                    label: 'Incident Management',
-                },
-                {
-                    label: 'On-call scheduling',
-                },
-                {
-                    label: 'Problem Management',
-                },
-                {
-                    label: 'Release Management',
-                },
-                {
-                    label: 'Request Management',
-                },
-                {
-                    label: 'Service Catalog',
-                },
-                {
-                    label: 'Service Desk',
-                },
-                {
-                    label: 'Service Portfolio Management',
-                },
-                {
-                    label: 'Service Level Management',
-                },
-                {
-                    label: 'task Outage',
-                },
-                {
-                    label: 'Collaboration services for Task Communications Management',
-                },
-                {
-                    label: 'Vendor Manager Workspace',
-                },
-                {
-                    label: 'Vendor Performance',
-                },
-                {
-                    label: 'Performance Analytics ITSM Dashboards',
-                },
+                // {
+                //     label: 'Coaching',
+                // },
+                // {
+                //     label: 'Continual Improvement Management',
+                // },
+                // {
+                //     label: 'Expense Line',
+                // },
+                // {
+                //     label: 'ITSM Virtual Agent',
+                // },
+                // {
+                //     label: 'Walk-up Experience',
+                // },
+                // {
+                //     label: 'ITSM Agent Workspace',
+                // },
+                // {
+                //     label: 'Incident Communications Management',
+                // },
+                // {
+                //     label: 'Incident Management',
+                // },
+                // {
+                //     label: 'On-call scheduling',
+                // },
+                // {
+                //     label: 'Problem Management',
+                // },
+                // {
+                //     label: 'Release Management',
+                // },
+                // {
+                //     label: 'Request Management',
+                // },
+                // {
+                //     label: 'Service Catalog',
+                // },
+                // {
+                //     label: 'Service Desk',
+                // },
+                // {
+                //     label: 'Service Portfolio Management',
+                // },
+                // {
+                //     label: 'Service Level Management',
+                // },
+                // {
+                //     label: 'task Outage',
+                // },
+                // {
+                //     label: 'Collaboration services for Task Communications Management',
+                // },
+                // {
+                //     label: 'Vendor Manager Workspace',
+                // },
+                // {
+                //     label: 'Vendor Performance',
+                // },
+                // {
+                //     label: 'Performance Analytics ITSM Dashboards',
+                // },
             ]
         },
     ]
@@ -242,7 +249,7 @@ function Sidebar(props) {
                 PaperProps={{
                     style: {
                         width: '280px',
-                        marginTop: '64px',
+                        marginTop: '114px',
                     },
                 }}
             >
@@ -251,26 +258,26 @@ function Sidebar(props) {
                         <React.Fragment key={index}>
                             <ListItem onClick={listItem.onClick}>
                                 <ListItemText>{listItem.label}</ListItemText>
-                                <ListItemIcon style={{minWidth: '0'}} onClick={handleClickProductItemExpander}>
-                                    { productItemExpander ? <ExpandLess /> : <ExpandMore /> }
+                                <ListItemIcon className={styles.listItemIcon} onClick={itemExpander.onClick}>
+                                    {itemExpander.expander ? <ExpandLess /> : <ExpandMore />}
                                 </ListItemIcon>
                             </ListItem>
-                            { productItemExpander ? 
-                                <List style={{ paddingLeft: '12px' }}>
+                            {itemExpander.expander ?
+                                <List className={styles.list}>
                                     {listItem && listItem.items && listItem.items.length > 0 ? listItem.items.map((item, index) => (
                                         <React.Fragment key={index}>
-                                            <ListItem>
+                                            <ListItem onClick={item.onClick} className={styles.listItem} style={{ backgroundColor: subItemExpander.expander ? '#eee' : '#fff' }}>
                                                 <ListItemText>{item.label}</ListItemText>
-                                                <ListItemIcon style={{minWidth: '0'}} onClick={handleClickProductSubItemExpander}>
-                                                    { productSubItemExpander ? <ExpandLess /> : <ExpandMore /> }
+                                                <ListItemIcon className={styles.listItemIcon} onClick={subItemExpander.onClick}>
+                                                    {subItemExpander.expander ? <ExpandLess /> : <ExpandMore />}
                                                 </ListItemIcon>
                                             </ListItem>
-                                            { productSubItemExpander ?
-                                                <List style={{ paddingLeft: '12px' }}>
+                                            {subItemExpander.expander ?
+                                                <List className={styles.list}>
                                                     {item && item.subItems && item.subItems.length > 0 ? item.subItems.map((subItem, index) => (
-                                                        <ListItem key={index}>
+                                                        <ListItem key={index} className={styles.subItemsListItem}>
                                                             <ListItemText>{subItem.label}</ListItemText>
-                                                            <ListItemIcon style={{minWidth: '0'}}>
+                                                            <ListItemIcon className={styles.listItemIcon}>
                                                                 <ExpandLess />
                                                             </ListItemIcon>
                                                         </ListItem>
@@ -288,4 +295,18 @@ function Sidebar(props) {
         </React.Fragment>
     )
 }
+
+function useExpander(initialValue) {
+    const [expander, setExpander] = useState(initialValue)
+
+    function handleClickExpander(){
+        setExpander(!expander);
+    }
+
+    return {
+        expander,
+        onClick: handleClickExpander
+    };
+}
+
 export default compose(withRouter)(Sidebar)
