@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './style.module.scss'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
-import { home } from '../../../routes'
+import { home, productOverview } from '../../../routes'
 
 import { AppBar, Toolbar, Typography, Button, IconButton, ListItem, List } from '@material-ui/core'
 
@@ -43,7 +43,7 @@ function DashboardWrapper(props) {
                     <div className={styles.menuItemsSection}>
                         <List className={styles.list}>
                             <ListItem className={styles.listItem} onClick={navigateTo(home)}>Home</ListItem>
-                            <ListItem className={styles.listItem}>Products</ListItem>
+                            <ListItem className={styles.listItem} onClick={navigateTo(productOverview)}>Products</ListItem>
                             <ListItem className={styles.listItem}>Release notes and upgrades</ListItem>
                             <ListItem className={styles.listItem}>Archive</ListItem>
                         </List>
