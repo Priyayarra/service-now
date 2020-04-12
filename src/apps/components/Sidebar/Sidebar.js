@@ -11,6 +11,14 @@ import {
     procurement,
     productCatalog,
     benchmarks,
+    mobileITAssetManagement,
+    assetAndCiManagement,
+    assetClasses,
+    createFixedAssets,
+    consumablesLifeCycle,
+    createPreAllocatedAssets,
+    stockrooms,
+    transferOrdersForAssetManagement,
 } from '../../../routes'
 import styles from './style.module.scss'
 
@@ -24,10 +32,10 @@ function Sidebar(props) {
 
     const itemExpander = useExpander(true)
     const subItemExpander = useExpander(true)
-    
+    const innerSubItemExpander = useExpander(true)
+
     const navigateTo = location => () => {
-        console.log('location', location);
-        
+        // console.log('location', location);
         history.push(location)
     }
     const sidebarItems = [
@@ -41,15 +49,15 @@ function Sidebar(props) {
                     subItems: [
                         {
                             label: 'Mobile for IT Asset Management',
-                            onClick: navigateTo(productOverview)
+                            onClick: navigateTo(mobileITAssetManagement)
                         },
                         {
                             label: 'Asset and CI management',
-                            onClick: navigateTo(productOverview)
+                            onClick: navigateTo(assetAndCiManagement)
                         },
                         {
                             label: 'Asset classes',
-                            onClick: navigateTo(productOverview),
+                            onClick: navigateTo(assetClasses),
                             subItems: [
                                 {
                                     label: 'Create an asset class',
@@ -71,23 +79,23 @@ function Sidebar(props) {
                         },
                         {
                             label: 'Create fixed assets',
-                            onClick: navigateTo(productOverview),
+                            onClick: navigateTo(createFixedAssets),
                         },
                         {
                             label: 'Consumables life cycle',
-                            onClick: navigateTo(productOverview),
+                            onClick: navigateTo(consumablesLifeCycle),
                         },
                         {
                             label: 'Create pre-allocated assets',
-                            onClick: navigateTo(productOverview),
+                            onClick: navigateTo(createPreAllocatedAssets),
                         },
                         {
                             label: 'Stockrooms',
-                            onClick: navigateTo(productOverview),
+                            onClick: navigateTo(stockrooms),
                         },
                         {
                             label: 'Transfer orders for Asset Management',
-                            onClick: navigateTo(productOverview),
+                            onClick: navigateTo(transferOrdersForAssetManagement),
                         },
                         {
                             label: 'Create a transfer order for Asset Management',
@@ -212,7 +220,7 @@ function Sidebar(props) {
                                             {subItemExpander.expander ?
                                                 <List className={styles.list}>
                                                     {item && item.subItems && item.subItems.length > 0 ? item.subItems.map((subItem, index) => (
-                                                        <ListItem key={index} className={styles.subItemsListItem}>
+                                                        <ListItem onClick={subItem.onClick} key={index} className={styles.subItemsListItem}>
                                                             <ListItemText>{subItem.label}</ListItemText>
                                                             <ListItemIcon className={styles.listItemIcon}>
                                                                 <ExpandLess />
@@ -236,7 +244,7 @@ function Sidebar(props) {
 function useExpander(initialValue) {
     const [expander, setExpander] = useState(initialValue)
 
-    function handleClickExpander(){
+    function handleClickExpander() {
         setExpander(!expander);
     }
 
