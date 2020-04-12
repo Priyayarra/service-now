@@ -22,12 +22,12 @@ function Sidebar(props) {
 
     const history = props.history
 
-    const subItemExpander = useExpander(true)
     const itemExpander = useExpander(true)
-
-
+    const subItemExpander = useExpander(true)
+    
     const navigateTo = location => () => {
-        // console.log('location', history.push)
+        console.log('location', location);
+        
         history.push(location)
     }
     const sidebarItems = [
@@ -175,69 +175,6 @@ function Sidebar(props) {
                     label: 'Change Management',
                     onClick: navigateTo(changeManagement)
                 },
-                // {
-                //     label: 'Coaching',
-                // },
-                // {
-                //     label: 'Continual Improvement Management',
-                // },
-                // {
-                //     label: 'Expense Line',
-                // },
-                // {
-                //     label: 'ITSM Virtual Agent',
-                // },
-                // {
-                //     label: 'Walk-up Experience',
-                // },
-                // {
-                //     label: 'ITSM Agent Workspace',
-                // },
-                // {
-                //     label: 'Incident Communications Management',
-                // },
-                // {
-                //     label: 'Incident Management',
-                // },
-                // {
-                //     label: 'On-call scheduling',
-                // },
-                // {
-                //     label: 'Problem Management',
-                // },
-                // {
-                //     label: 'Release Management',
-                // },
-                // {
-                //     label: 'Request Management',
-                // },
-                // {
-                //     label: 'Service Catalog',
-                // },
-                // {
-                //     label: 'Service Desk',
-                // },
-                // {
-                //     label: 'Service Portfolio Management',
-                // },
-                // {
-                //     label: 'Service Level Management',
-                // },
-                // {
-                //     label: 'task Outage',
-                // },
-                // {
-                //     label: 'Collaboration services for Task Communications Management',
-                // },
-                // {
-                //     label: 'Vendor Manager Workspace',
-                // },
-                // {
-                //     label: 'Vendor Performance',
-                // },
-                // {
-                //     label: 'Performance Analytics ITSM Dashboards',
-                // },
             ]
         },
     ]
@@ -256,8 +193,8 @@ function Sidebar(props) {
                 <List>
                     {sidebarItems.map((listItem, index) => (
                         <React.Fragment key={index}>
-                            <ListItem onClick={listItem.onClick}>
-                                <ListItemText>{listItem.label}</ListItemText>
+                            <ListItem style={{ backgroundColor: itemExpander.onClick ? '#99999985' : '#fff' }}>
+                                <ListItemText onClick={listItem.onClick}>{listItem.label}</ListItemText>
                                 <ListItemIcon className={styles.listItemIcon} onClick={itemExpander.onClick}>
                                     {itemExpander.expander ? <ExpandLess /> : <ExpandMore />}
                                 </ListItemIcon>
